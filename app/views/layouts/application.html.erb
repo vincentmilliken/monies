@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MoneyApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class="container-narrow">
+    
+     <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+           <% if user_signed_in? %>
+              <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
+           <% else %>
+              <li><%= link_to "Sign In", new_user_session_path %></li>
+           <% end %>
+        </ul>
+        <h3 class="muted">Monies</h3>
+     </div>
+
+			<% flash.each do |key, value| %>
+				<%= content_tag(:div, value, class: "alert alert-#{key}") %>
+			<% end %>
+		
+		<%= yield %>
+		
+
+      <div class="footer">
+        <p>&copy; Company 2013</p>
+      </div>
+	
+    </div> <!-- /container -->	
+	
+</body>
+</html>
